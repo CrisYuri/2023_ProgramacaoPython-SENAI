@@ -6,4 +6,3 @@ print(math.fsum(a))
 a.append(5)
 
 print(math.fsum(a))
-
