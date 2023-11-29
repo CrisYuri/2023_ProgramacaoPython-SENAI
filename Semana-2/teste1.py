@@ -5,15 +5,18 @@
 # if (a < b) == False:
 #     print('a é maior ou igual a 5')
 
-
-x = 'banana'
-y = 'maçã'
 #
-# if x == y is True:
-#     print('é igual')
-# if x == y is False:
-#     print('não é igual')
+# x = 'banana'
+# y = 'maçã'
+# #
+# # if x == y is True:
+# #     print('é igual')
+# # if x == y is False:
+# #     print('não é igual')
+#
+# print(x == y)
+# print(x != y)
 
-print(x == y)
-print(x != y)
-
+x = bool(input("escreva:"))
+print(x)
+print(type(x))
