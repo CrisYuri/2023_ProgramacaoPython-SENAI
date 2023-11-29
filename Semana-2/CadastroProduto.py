@@ -3,7 +3,7 @@
 estoque = []
 cadastrarNovo = input('Cadastrar novo produto? (sim ou não): ')
 
-while cadastrarNovo == 'sim':
+while cadastrarNovo.lower() == 'sim':
     nomeProduto = input('Nome do produto: ')
     preco = float(input('Preço R$: '))
     quantidade = int(input('Quantidade: '))
@@ -13,14 +13,14 @@ while cadastrarNovo == 'sim':
         'nomeProduto': nomeProduto,
         'preco': preco,
         'quantidade': quantidade,
-        'disponibilidade': disponivel
+        'disponibilidade': disponivel.lower()
     }
 
     estoque.append(produto)
 
     cadastrarNovo = input('Deseja cadastrar novo produto? (sim ou não): ')
 
-print('\n\tCatálogo de produtos \n==============================================\n')
+print('\n\t\tCatálogo de produtos \n==============================================\n')
 
 for produto in estoque:
     print(f'Produto    | {produto["nomeProduto"]}')
@@ -35,20 +35,32 @@ for produto in estoque:
     else:
         print(f'Quantidade | {produto["quantidade"]}')
         print(f'Disponível | {produto["disponibilidade"]}')
-        print(f'O valor total de {produto["nomeProduto"]} em estoque é R$ {(produto["quantidade"]*produto["preco"]):.2f} ')
+        print(f'O valor total de {produto["nomeProduto"]} em estoque é R$ {(produto["quantidade"] * produto["preco"]):.2f} ')
 
     print('\n==============================================\n')
 
 consultarProduto = input('Deseja consultar valor de produto em estoque? (sim ou não): ')
 
-while consultarProduto == 'sim':
-    consulta = input('Qual produto deseja consultar?: ')
+consultarProduto = input('Deseja consultar valor de produto em estoque? (sim ou não): ')
 
-    if consulta in produto['nomeProduto']:
-        print(f'O valor total de {produto["nomeProduto"]} em estoque é R$ {(produto["quantidade"] * produto["preco"]):.2f} ')
-    elif consulta not in produto['nomeProduto']:
+while consultarProduto.lower() == 'sim':
+    consulta = input('Qual produto deseja consultar?: ')
+    produto_encontrado = False
+
+    for produto in estoque:
+        if consulta.lower() == produto['nomeProduto'].lower():
+            print(f'O valor total de {produto["nomeProduto"]} em estoque é R$ {(produto["quantidade"] * produto["preco"]):.2f} ')
+            if produto["disponibilidade"] == "sim":
+                print('Produto disponível para venda.')
+            else:
+                print('Produto indisponível para venda.')
+            produto_encontrado = True
+            break
+
+    if not produto_encontrado:
         print('Produto indisponível no estoque')
 
     consultarProduto = input('Deseja consultar produto? (sim ou não): ')
 
 print('<< fim >>')
+
