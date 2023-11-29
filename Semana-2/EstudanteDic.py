@@ -1,6 +1,6 @@
 # Estudantes | Dicionário
 
-# Entrada e armazenamento
+# Entrada, Armazenamento e Processamento
 alunos = []
 
 novoAluno = input('Deseja cadastrar novo aluno? (sim ou não): ')
@@ -29,7 +29,8 @@ while novoAluno == 'sim':
     novoAluno = input('Deseja cadastrar novo aluno? (sim ou não): ')
 
 print("\n \t\t\t\t\t Alunos Cadastrados \n =========================================================")
-# Saida
+
+# Saída
 for estudante in alunos:
 
     print(f'>>> Aluno: {estudante['nome']}')
