@@ -7,7 +7,5 @@ tipo = {
 }
 
 print(frutas)
-print(frutas.items())
-print(frutas.keys())
-print(frutas.values())
+
 
