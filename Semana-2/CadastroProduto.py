@@ -1,7 +1,6 @@
 # Sistema para cadastro de produtos
 
 estoque = []
-
 cadastrarNovo = input('Cadastrar novo produto? (sim ou não): ')
 
 while cadastrarNovo == 'sim':
