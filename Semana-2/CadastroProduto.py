@@ -46,7 +46,7 @@ while consultarProduto == 'sim':
 
     if consulta in produto['nomeProduto']:
         print(f'O valor total de {produto["nomeProduto"]} em estoque é R$ {(produto["quantidade"] * produto["preco"]):.2f} ')
-    else:
+    elif consulta not in produto['nomeProduto']:
         print('Produto indisponível no estoque')
 
     consultarProduto = input('Deseja consultar produto? (sim ou não): ')
