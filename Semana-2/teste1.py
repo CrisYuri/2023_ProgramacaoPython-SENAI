@@ -17,6 +17,9 @@
 # print(x == y)
 # print(x != y)
 
-x = bool(input("escreva:"))
-print(x)
-print(type(x))
+# x = bool(input("escreva:"))
+# print(x)
+# print(type(x))
+
+# x = 4 ** (1/2)
+# print(x)
