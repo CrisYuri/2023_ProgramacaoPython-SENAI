@@ -10,7 +10,10 @@ def mult(n1, n2):
     return n1 * n2
 
 def div(n1, n2):
-    return n1 / n2
+    try:
+        return n1 / n2
+    except ZeroDivisionError:
+        print("Erro: Divisão por zero!")
 
 
 #  Teste
