@@ -37,11 +37,13 @@ while True:
         num2 = int(valores['Num2']) 
         janela['total'].update(calc2.mult(num1, num2))
     elif valores['div'] == True:
-        num2 = float(valores['Num2'])  # Converter para float para tratar divisão por zero
-        if num2 == 0:
-            psg.popup('Divisão por zero!')
-        else:
-            num1 = int(valores['Num1'])
+        num1 = int(valores['Num1'])
+        num2 = int(valores['Num2'])
+        if num2 != 0:
             janela['total'].update(calc2.div(num1, num2))
+        else:
+            psg.popup('Divisão por zero!')
+            janela['Num2'].update('')
+            continue
         
 janela.close()
