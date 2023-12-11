@@ -73,26 +73,37 @@ def calcIR (salBruto, dependentes, idade, versaoCalculo):
     aliqEfetiva = irDevido / salBruto
     salLiq = salBruto - irDevido
 
-    # return irBruto
-    # return irDevido
-    # return aliqEfetiva
-    # return salLiq    
+    # 
+    if faixa == 0:
+        aliq = 'Isento'
+        irDevido = 'Isento'
+        aliqEfetiva = 'Isento'
+    
     # Saída
-    print('\n\t --- Resultado do cálcudo do seu Imposto de Renda --- \n')
-    print(f'Salário bruto: R$ {salBruto:.2f}')
-    print(f'Dependentes: {dependentes}')
-    print(f'Salário base: R$ {salBase:.2f}')
-    if faixa != 0:
-        print(f'Alíquota: {aliq}')
-        print(f'Imposto devido: R$ {irDevido:.2f}') 
-    else:
-        print('Alíquota: Isento')
-        print('Alíquota: Isento')
-    print(f'Salário líquido: R$ {salLiq:.2f}')
-    if faixa != 0:
-        print(f'Alíquota efetiva: {(aliqEfetiva * 100):.2f}%')
-    else:
-        print('Alíquota: Isento')
+    return {'irBruto': irBruto,
+            'dependentes': dependentes,
+            'salBase': salBase,
+            'aliq': aliq,
+            'irDevido': irDevido,
+            'salLiq': salLiq,
+            'aliqEfetiva': aliqEfetiva
+    }
 
+
+    # print('\n\t --- Resultado do cálcudo do seu Imposto de Renda --- \n')
+    # print(f'Salário bruto: R$ {salBruto:.2f}')
+    # print(f'Dependentes: {dependentes}')
+    # print(f'Salário base: R$ {salBase:.2f}')
+    # if faixa != 0:
+    #     print(f'Alíquota: {aliq}')
+    #     print(f'Imposto devido: R$ {irDevido:.2f}') 
+    # else:
+    #     print('Alíquota: Isento')
+    #     print('Alíquota: Isento')
+    # print(f'Salário líquido: R$ {salLiq:.2f}')
+    # if faixa != 0:
+    #     print(f'Alíquota efetiva: {(aliqEfetiva * 100):.2f}%')
+    # else:
+    #     print('Alíquota: Isento')
 
 

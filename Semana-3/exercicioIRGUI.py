@@ -1,21 +1,27 @@
 import PySimpleGUI as psg
 from calcIR import*
-import sys
 
-layout = [[psg.Text('Escolha a versão de cáculo de Imposto de renda que deseja utilizar')],
-          [psg.Radio('Até abril de 2023', 'versao', key='v1'), psg.Radio('Após maio de 2023', 'versao', key='v2', default=True)],
+layout = [[psg.Check('Cálculo  do IR com regra a partir de maio de 2023?', key='regra')],
           [psg.Text('Salário bruto: '), psg.InputText(key='salBruto')],
           [psg.Text('Dependentes: '), psg.InputText(key='dependentes')],
           [psg.Text('Idade: '), psg.InputText(key='idade')],
           [psg.Button('Calcular'), psg.Button('Limpar')],
           [psg.Text('--- Resultado do cálculo do seu Imposto de Renda ---')],
-          [psg.Output(size=(50, 10), key='saida')]
+          [psg.Text('', key='salBase')],
+          [psg.Text('', key='aliq')],
+          [psg.Text('', key='irDevido')],
+          [psg.Text('', key='salLiq')],
+          [psg.Text('', key='aliqEfetiva')]
          ]
 
 janela = psg.Window('Calculadora de Imposto de Renda', layout)
 
 while True:
     evento, valores = janela.read()
+    if valores['regra'] == True:
+        versaoCalculo = 'sim'
+    else:
+        versaoCalculo = 'não'
     if evento == psg.WIN_CLOSED:
         break
     elif evento == 'Limpar':
@@ -28,22 +34,20 @@ while True:
         janela['irDevido'].update('')
         janela['salLiq'].update('')
         janela['aliqEfetiva'].update('')
-    elif valores['v2'] == True:
-        versaoCalculo = 'sim'
-        salBruto = valores['salBruto']
-        dependentes = int(valores['dependentes'])
-        idade = int(valores['idade'])
-        original_stdout = sys.stdout
-        sys.stdout = janela['saida'].TKOut
-        calcIR()
-        sys.stdout = original_stdout
+        janela['regra'].update(False)
+    # elif valores['v2'] == True:
+    #     versaoCalculo = 'sim'
+    #     salBruto = valores['salBruto']
+    #     dependentes = int(valores['dependentes'])
+    #     idade = int(valores['idade'])
+
     else:
-        versaoCalculo = 'não'
         salBruto = float(valores['salBruto'])
         dependentes = int(valores['dependentes'])
         idade = int(valores['idade'])
-        original_stdout = sys.stdout
-        sys.stdout = janela['saida'].TKOut
-        calcIR()
-        sys.stdout = original_stdout
-        
+        impostoRenda = calcIR(float(valores['salBruto']), int(valores['dependentes']), int(valores['idade']), str('versaoCalculo'))
+        janela['salBase'].update(f"Salário base: R$ {impostoRenda['salBase']:.2f}")
+        janela['aliq'].update(f"Alíquota da faixa: {impostoRenda['aliq']}")
+        janela['irDevido'].update(f"IR devido: R$ {impostoRenda['irDevido']:.2f}")
+        janela['salLiq'].update(f"Salário líquido: R$ {impostoRenda['salLiq']:.2f}")
+        janela['aliqEfetiva'].update(f"Alíquota efetiva: {impostoRenda['aliqEfetiva']*100:.2f}%")
