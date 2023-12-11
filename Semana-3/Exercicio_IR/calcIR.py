@@ -6,24 +6,18 @@ def calcIR (salBruto, dependentes, idade, versaoCalculo):
     descDependente = dependentes * 189.59
     descontoSimplificado = 528.00
 
-    # Encontrar salário base
-    salBase = salBruto - descDependente
-
-    # Faixas de IR
-    faixaIsento = 1903.99
-    faixa1 = 2826.66
-    faixa2 = 3751.06
-    faixa3 = 4664.68
-
-    # Dedução por faixa
+    faixaIsento = 0
+    faixa1 = 0
+    faixa2 = 0
+    faixa3 = 0
     deducaoIsento = 0
-    deducao1 = 142.80
-    deducao2 = 354.80
-    deducao3 = 636.13
-    deducao4 = 869.36
-
+    deducao1 = 0
+    deducao2 = 0
+    deducao3 = 0
+    deducao4 = 0
+    aliq = 'None'
     
-    if versaoCalculo.lower() == "sim":
+    if versaoCalculo:
         # Encontrar salário base
         if descDependente > descontoSimplificado:
             salBase = salBruto - descDependente
@@ -45,6 +39,22 @@ def calcIR (salBruto, dependentes, idade, versaoCalculo):
         deducao3 = 651.73
         deducao4 = 884.96
 
+    else:
+        # Encontrar salário base
+        salBase = salBruto - descDependente
+
+        # Faixas de IR
+        faixaIsento = 1903.99
+        faixa1 = 2826.66
+        faixa2 = 3751.06
+        faixa3 = 4664.68
+
+        # Dedução por faixa
+        deducaoIsento = 0
+        deducao1 = 142.80
+        deducao2 = 354.80
+        deducao3 = 636.13
+        deducao4 = 869.36
     ## Encontrar faixa de IR, dedução pela faixa do salário base
     if salBase < faixaIsento:
         faixa = 0
@@ -73,11 +83,11 @@ def calcIR (salBruto, dependentes, idade, versaoCalculo):
     aliqEfetiva = irDevido / salBruto
     salLiq = salBruto - irDevido
 
-    # 
-    if faixa == 0:
-        aliq = 'Isento'
-        irDevido = 'Isento'
-        aliqEfetiva = 'Isento'
+    # # 
+    # if faixa == 0:
+    #     aliq = 'Isento'
+    #     irDevido = 'Isento'
+    #     aliqEfetiva = 'Isento'
     
     # Saída
     return {'irBruto': irBruto,

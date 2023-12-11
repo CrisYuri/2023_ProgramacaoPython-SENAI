@@ -18,10 +18,6 @@ janela = psg.Window('Calculadora de Imposto de Renda', layout)
 
 while True:
     evento, valores = janela.read()
-    if valores['regra'] == True:
-        versaoCalculo = 'sim'
-    else:
-        versaoCalculo = 'não'
     if evento == psg.WIN_CLOSED:
         break
     elif evento == 'Limpar':
@@ -45,7 +41,8 @@ while True:
         salBruto = float(valores['salBruto'])
         dependentes = int(valores['dependentes'])
         idade = int(valores['idade'])
-        impostoRenda = calcIR(float(valores['salBruto']), int(valores['dependentes']), int(valores['idade']), str('versaoCalculo'))
+        versaoCalculo = valores['regra']
+        impostoRenda = calcIR(float(valores['salBruto']), int(valores['dependentes']), int(valores['idade']), versaoCalculo)
         janela['salBase'].update(f"Salário base: R$ {impostoRenda['salBase']:.2f}")
         janela['aliq'].update(f"Alíquota da faixa: {impostoRenda['aliq']}")
         janela['irDevido'].update(f"IR devido: R$ {impostoRenda['irDevido']:.2f}")

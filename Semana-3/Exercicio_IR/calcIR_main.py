@@ -8,13 +8,16 @@ print('\n\t\t\t --- Calculadora de Imposto de Renda ---\n')
 
 # Entrada
 
-versaoCalculo = input('Deseja utilizar a versão de cáculo após Maio de 2023? (sim ou não) ')
+versao = input('Deseja utilizar a versão de cáculo após Maio de 2023? (sim ou não) ')
 salBruto = float(input('Salário bruto R$: '))
 dependentes = int(input('Dependentes: '))
 idade = int(input('Qual sua idade?: '))
 
 # Processamento
-
+if versao == 'sim':
+    versaoCalculo = True
+else:
+    versaoCalculo = False
 impostoRenda = calcIR(salBruto, dependentes, idade, versaoCalculo)
 
 print('\n\t --- Resultado do cálcudo do seu Imposto de Renda --- \n')
