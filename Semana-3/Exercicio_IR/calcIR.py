@@ -1,4 +1,4 @@
-# Calculadora Imposto de Renda v.2 - até abril/2023
+# Calculadora Imposto de Renda v.2.1
 
 # função
 
